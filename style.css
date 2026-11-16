@@ -1,0 +1,807 @@
+/* ==========================================================================
+   Library Management System - Stylesheet
+   Course: IT Workshop - Assignment 1 (Web-Based Variant)
+   Design: Student-made, clean, structured, responsive UI (Mobile-First)
+   ========================================================================== */
+
+/* --- 1. CSS Variables & Reset --- */
+:root {
+  --primary: #1f4e79;
+  --primary-dark: #163a5a;
+  --bg: #f2f2f2;
+  --card: #ffffff;
+  --border: #cccccc;
+  --text: #222222;
+  --muted: #666666;
+  --success: #2e7d32;
+  --error: #c62828;
+  --warning: #e68a00;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-wrap: anywhere;
+}
+
+/* --- 2. Header & Sticky Navigation (Mobile-First Base) --- */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  width: 100%;
+  padding: 12px 16px;
+  box-sizing: border-box;
+}
+
+.header-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.header-titles h1 {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.header-titles .subtitle {
+  font-size: 12px;
+  color: #d0e1fd;
+  margin-top: 2px;
+}
+
+/* Hamburger Menu Toggle (visible by default on mobile < 900px) */
+.menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 14px;
+  background-color: var(--primary-dark);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.menu-toggle:hover {
+  background-color: #10293f;
+}
+
+/* Navbar Menu (collapsed by default on mobile) */
+.navbar {
+  display: none;
+  width: 100%;
+  background-color: var(--primary);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  box-sizing: border-box;
+}
+
+/* When expanded on mobile */
+.navbar.nav-open {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
+}
+
+.nav-btn {
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  padding: 10px 16px;
+  background: transparent;
+  color: #ffffff;
+  border: none;
+  border-left: 4px solid transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.nav-btn:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.nav-btn.active {
+  background-color: var(--primary-dark);
+  border-left-color: #ffffff;
+  border-bottom: 3px solid #ffffff;
+}
+
+/* --- 3. Main Container & Section Visibility --- */
+.container {
+  width: 100%;
+  margin: 16px auto;
+  padding: 0 16px;
+  flex: 1 0 auto;
+  box-sizing: border-box;
+}
+
+/* Section visibility */
+.page {
+  display: none;
+}
+
+.page.active,
+.page.show {
+  display: block;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Section Headings ("lab record" look) */
+.page h2 {
+  font-size: 20px;
+  color: var(--primary);
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 6px;
+}
+
+.page h3 {
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+/* --- 4. Cards Layout --- */
+.card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 6px;
+}
+
+.section-header h2 {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Centered Form Card */
+.form-card {
+  max-width: 650px;
+  margin: 0 auto 20px auto;
+  padding: 20px;
+}
+
+/* --- 5. Status Message Banner --- */
+.status-message {
+  display: none;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-left-width: 4px;
+}
+
+.status-message.show {
+  display: block;
+}
+
+.status-message.success {
+  background-color: #e8f5e9;
+  color: var(--success);
+  border-color: #c8e6c9;
+  border-left: 4px solid var(--success);
+}
+
+.status-message.error {
+  background-color: #ffebee;
+  color: var(--error);
+  border-color: #ffcdd2;
+  border-left: 4px solid var(--error);
+}
+
+.status-message.warning {
+  background-color: #fff3e0;
+  color: var(--warning);
+  border-color: #ffe0b2;
+  border-left: 4px solid var(--warning);
+}
+
+/* --- 6. Dashboard Stat Cards --- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stat-card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.stat-card.stat-primary {
+  border-left: 4px solid var(--primary);
+}
+
+.stat-card.stat-success {
+  border-left: 4px solid var(--success);
+}
+
+.stat-card.stat-warning {
+  border-left: 4px solid var(--warning);
+}
+
+.stat-card.stat-muted {
+  border-left: 4px solid var(--muted);
+}
+
+.stat-value {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.stat-label {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.reset-card p {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+/* --- 7. Forms, Labels, and Inputs --- */
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 5px;
+}
+
+.required {
+  color: var(--error);
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 12px;
+  font-family: inherit;
+  font-size: 16px; /* 16px prevents iOS browser auto-zoom */
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: var(--text);
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 0;
+  border-color: var(--primary);
+}
+
+.input-error {
+  border-color: var(--error) !important;
+  outline-color: var(--error) !important;
+}
+
+.field-hint {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.tip-box {
+  background-color: #e8f1f8;
+  border-left: 4px solid var(--primary);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--primary);
+  margin-bottom: 14px;
+  border-radius: 2px;
+}
+
+/* Form Actions Button Row */
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.form-actions .btn {
+  width: 100%;
+}
+
+/* --- 8. Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 18px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #ffffff;
+  border: 1px solid var(--primary-dark);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-primary:active {
+  background-color: #10293f;
+}
+
+.btn-secondary {
+  background-color: var(--card);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.btn-secondary:hover {
+  background-color: #eef3f8;
+}
+
+.btn-secondary:active {
+  background-color: #dce7f2;
+}
+
+.btn:disabled {
+  background-color: #e0e0e0;
+  color: #888888;
+  border-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* --- 9. Tables (Mobile Card Style < 600px) --- */
+.table-responsive {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* On phones (< 600px), transform table into stacked cards */
+@media (max-width: 599.98px) {
+  .data-table thead {
+    display: none;
+  }
+
+  .data-table,
+  .data-table tbody,
+  .data-table tr,
+  .data-table td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .data-table tbody tr {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  .data-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 4px;
+    border: none;
+    border-bottom: 1px solid #f0f0f0;
+    text-align: right;
+    font-size: 14px;
+  }
+
+  .data-table td:last-child {
+    border-bottom: none;
+  }
+
+  .data-table td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: var(--text);
+    text-align: left;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  .data-table td.empty-state {
+    display: block;
+    text-align: center;
+    padding: 16px 8px;
+    border: none;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .data-table td.empty-state::before {
+    content: none;
+    display: none;
+  }
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-available,
+.status-badge.status-available {
+  background-color: #e8f5e9;
+  color: var(--success);
+}
+
+.status-na,
+.status-badge.status-na {
+  background-color: #ffebee;
+  color: var(--error);
+}
+
+.status-issued,
+.status-badge.status-issued {
+  background-color: #fff3e0;
+  color: var(--warning);
+}
+
+.status-returned,
+.status-badge.status-returned {
+  background-color: #e8f5e9;
+  color: var(--success);
+}
+
+.count-badge {
+  background-color: var(--primary);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+
+/* --- 10. Search Section Styles --- */
+.search-card {
+  max-width: 650px;
+  margin: 0 auto 20px auto;
+  padding: 20px;
+}
+
+.search-options {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.search-label {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.radio-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.search-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.search-bar input[type="text"] {
+  width: 100%;
+}
+
+.search-bar .btn {
+  width: 100%;
+}
+
+.search-hint {
+  color: var(--muted);
+  font-style: italic;
+  padding: 8px 0;
+}
+
+/* --- 11. Exit Screen --- */
+.exit-card {
+  max-width: 500px;
+  margin: 30px auto;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.exit-card h2 {
+  border-bottom: none;
+  margin-bottom: 10px;
+}
+
+.exit-card p {
+  color: var(--muted);
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+/* --- 12. Footer --- */
+.app-footer {
+  background-color: #e6e6e6;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 14px 16px;
+  font-size: 13px;
+  margin-top: 30px;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints (Mobile-First min-width queries)
+   ========================================================================== */
+
+/* --- Breakpoint 1: ≥ 600px (Large phones / Small tablets) --- */
+@media (min-width: 600px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-actions {
+    flex-direction: row;
+  }
+
+  .form-actions .btn {
+    width: auto;
+  }
+
+  .search-bar {
+    flex-direction: row;
+  }
+
+  .search-bar .btn {
+    width: auto;
+  }
+
+  /* Tables revert to standard bordered table layout */
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .data-table {
+    display: table;
+    margin-top: 6px;
+    font-size: 13px;
+    background-color: var(--card);
+  }
+
+  .data-table thead {
+    display: table-header-group;
+  }
+
+  .data-table tbody {
+    display: table-row-group;
+  }
+
+  .data-table tbody tr {
+    display: table-row;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 0;
+  }
+
+  .data-table th,
+  .data-table td {
+    display: table-cell;
+    border: 1px solid #b0bec5;
+    padding: 9px 12px;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .data-table td::before {
+    display: none;
+    content: none;
+  }
+
+  .data-table th {
+    background-color: var(--primary);
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  .data-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .data-table tbody tr:hover {
+    background-color: #eef3f8;
+  }
+
+  .data-table td.empty-state {
+    display: table-cell;
+    text-align: center;
+    padding: 16px !important;
+  }
+}
+
+/* --- Breakpoint 2: ≥ 900px (Tablets landscape / Laptops) --- */
+@media (min-width: 900px) {
+  .header-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 14px 16px 10px 16px;
+  }
+
+  .header-titles h1 {
+    font-size: 22px;
+  }
+
+  /* Hide hamburger menu toggle */
+  .menu-toggle {
+    display: none !important;
+  }
+
+  /* Show full horizontal navbar */
+  .navbar {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 16px;
+    border-top: none;
+  }
+
+  .nav-btn {
+    display: inline-block;
+    width: auto;
+    border: 1px solid var(--primary-dark);
+    border-bottom: 3px solid transparent;
+    border-radius: 4px 4px 0 0;
+    padding: 9px 15px;
+    text-align: center;
+  }
+
+  .nav-btn.active {
+    background-color: var(--primary-dark);
+    border-bottom: 3px solid #ffffff;
+    border-left-color: var(--primary-dark);
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 20px auto;
+  }
+
+  /* 4 columns stat grid on desktop */
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* 2-column form grid */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+  }
+
+  .form-grid .full-width,
+  .form-grid .form-actions {
+    grid-column: 1 / -1;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    font-size: 14px;
+  }
+}
+
+/* --- Breakpoint 3: ≥ 1200px (Desktops / Large screens) --- */
+@media (min-width: 1200px) {
+  .header-content,
+  .navbar,
+  .container {
+    max-width: 1100px;
+  }
+}
